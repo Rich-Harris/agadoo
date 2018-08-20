@@ -13,7 +13,7 @@ Tell you why tree-shaking fails, if it does. Maybe in a future version.
 
 ## Hold up — tree what now?
 
-With the advent of JavaScript modules (`import` and `export`), it's possible to build libraries that are *tree-shakeable*. This means that a user of your library can import just the bits they need, without burdening their users with all the code they're *not* using.
+With the advent of JavaScript modules (`import` and `export`), it's possible to build libraries that are *tree-shakeable*. This means that a user of your library can import just the bits they need, without burdening their users with all the code you're *not* using.
 
 For example, the [eases-jsnext](https://github.com/Rich-Harris/eases-jsnext) library contains a grab-bag of [Robert Penner's easing equations](http://robertpenner.com/easing/), presented as a JavaScript module. I can use it like this in my code...
 

@@ -2,10 +2,10 @@ const path = require('path');
 const { rollup } = require('rollup');
 const virtual = require('rollup-plugin-virtual');
 
-exports.check = async input => {
+exports.check = input => {
 	const resolved = path.resolve(input);
 
-	const bundle = await rollup({
+	return rollup({
 		input: '__agadoo__',
 		plugins: [
 			virtual({
@@ -15,15 +15,13 @@ exports.check = async input => {
 		onwarn: (warning, handle) => {
 			if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
 		}
-	});
-
-	const output = await bundle.generate({
+	}).then(bundle => bundle.generate({
 		format: 'esm'
+	})).then(output => {
+		console.log(output.code);
+
+		return {
+			shaken: output.code.trim() === ''
+		};
 	});
-
-	console.log(output.code);
-
-	return {
-		shaken: output.code.trim() === ''
-	};
 };

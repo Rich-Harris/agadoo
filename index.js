@@ -18,10 +18,10 @@ exports.check = input => {
 	}).then(bundle => bundle.generate({
 		format: 'esm'
 	})).then(output => {
-		console.log(output.code);
+		console.log(`\`\`\`\n${output.code}\n\`\`\``);
 
 		return {
-			shaken: output.code.trim() === ''
+			shaken: output.code.replace(/^import .*$/gm, '').trim() === ''
 		};
 	});
 };

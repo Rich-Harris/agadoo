@@ -17,11 +17,11 @@ exports.check = input => {
 		}
 	}).then(bundle => bundle.generate({
 		format: 'esm'
-	})).then(output => {
-		console.log(output.code);
+	})).then(result => {
+		console.log(result.output[0].code);
 
 		return {
-			shaken: output.code.trim() === ''
+			shaken: result.output[0].code.trim() === ''
 		};
 	});
 };

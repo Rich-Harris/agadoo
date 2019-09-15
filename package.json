@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/Rich-Harris/agadoo#readme",
   "dependencies": {
-    "rollup": "^0.64.1",
+    "rollup": "^1",
     "rollup-plugin-virtual": "^1.0.1"
   }
 }

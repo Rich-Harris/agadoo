@@ -1,5 +1,9 @@
 # agadoo changelog
 
+## 1.1.0
+
+* Upgrade Rollup
+
 ## 1.0.1
 
 * Remove `async`/`await` so it runs in Node 6

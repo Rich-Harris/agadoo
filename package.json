@@ -1,6 +1,6 @@
 {
   "name": "agadoo",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "Check whether a package is tree-shakeable",
   "main": "index.js",
   "scripts": {

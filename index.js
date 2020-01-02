@@ -1,5 +1,6 @@
 const path = require('path');
 const { rollup } = require('rollup');
+const acorn = require('acorn');
 const virtual = require('rollup-plugin-virtual');
 
 exports.check = input => {
@@ -18,10 +19,21 @@ exports.check = input => {
 	}).then(bundle => bundle.generate({
 		format: 'esm'
 	})).then(result => {
-		console.log(result.output[0].code);
+		const { code } = result.output[0];
+
+		const ast = acorn.parse(code, {
+			ecmaVersion: 11,
+			sourceType: 'module'
+		});
+
+		const nodes = ast.body.filter(node => {
+			return node.type !== 'ImportDeclaration';
+		});
+
+		console.log(code);
 
 		return {
-			shaken: result.output[0].code.trim() === ''
+			shaken: nodes.length === 0
 		};
 	});
 };

@@ -4,7 +4,7 @@ const c = require('kleur');
 const child_process = require('child_process');
 
 const exec = cmd => new Promise((fulfil, reject) => {
-	child_process.exec(cmd, err => {
+	child_process.exec(cmd, (err, stdout, stderr) => {
 		if (err) {
 			reject(err);
 		} else {
@@ -49,9 +49,9 @@ async function main() {
 
 			try {
 				await exec(`agadoo`);
+				failed = true;
 				console.log(`${c.bold().red('✗')} ${dir}`);
 			} catch (err) {
-				failed = true;
 				console.log(`${c.bold().green('✓')} ${dir}`);
 			}
 		}

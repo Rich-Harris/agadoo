@@ -1,5 +1,9 @@
 # agadoo changelog
 
+## 2.0.0
+
+* Ignore external imports ([#3](https://github.com/Rich-Harris/agadoo/issues/3))
+
 ## 1.1.0
 
 * Upgrade Rollup

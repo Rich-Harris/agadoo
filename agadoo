@@ -30,7 +30,7 @@ function get_input() {
 	const resolved = resolve(unresolved);
 
 	if (!resolved) {
-		error(`Could not resolve entry point`);
+		error(`Could not resolve entry point because the package.json doesn't expose "module" or "main" key.`);
 	}
 
 	return resolved;

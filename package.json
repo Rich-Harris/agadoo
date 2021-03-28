@@ -28,11 +28,11 @@
   },
   "homepage": "https://github.com/Rich-Harris/agadoo#readme",
   "dependencies": {
-    "acorn": "^7.1.0",
-    "rollup": "^1",
-    "rollup-plugin-virtual": "^1.0.1"
+    "@rollup/plugin-virtual": "^2.0.3",
+    "acorn": "^8.1.0",
+    "rollup": "^2"
   },
   "devDependencies": {
-    "kleur": "^3.0.3"
+    "kleur": "^4.1.4"
   }
 }

@@ -1,7 +1,7 @@
 const path = require('path');
 const { rollup } = require('rollup');
 const acorn = require('acorn');
-const virtual = require('rollup-plugin-virtual');
+const virtual = require('@rollup/plugin-virtual');
 
 exports.check = input => {
 	const resolved = path.resolve(input);

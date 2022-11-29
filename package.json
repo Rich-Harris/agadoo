@@ -23,7 +23,7 @@
 		"tree-shaking"
 	],
 	"author": "Rich Harris",
-	"license": "LIL",
+	"license": "MIT",
 	"bugs": {
 		"url": "https://github.com/Rich-Harris/agadoo/issues"
 	},

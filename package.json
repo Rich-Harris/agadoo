@@ -1,38 +1,39 @@
 {
-  "name": "agadoo",
-  "version": "2.0.0",
-  "description": "Check whether a package is tree-shakeable",
-  "main": "index.js",
-  "scripts": {
-    "test": "node test"
-  },
-  "bin": {
-    "agadoo": "agadoo"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Rich-Harris/agadoo.git"
-  },
-  "keywords": [
-    "modules",
-    "bundlers",
-    "rollup",
-    "webpack",
-    "parcel",
-    "tree-shaking"
-  ],
-  "author": "Rich Harris",
-  "license": "LIL",
-  "bugs": {
-    "url": "https://github.com/Rich-Harris/agadoo/issues"
-  },
-  "homepage": "https://github.com/Rich-Harris/agadoo#readme",
-  "dependencies": {
-    "acorn": "^7.1.0",
-    "rollup": "^1",
-    "rollup-plugin-virtual": "^1.0.1"
-  },
-  "devDependencies": {
-    "kleur": "^3.0.3"
-  }
+	"name": "agadoo",
+	"version": "3.0.0",
+	"description": "Check whether a package is tree-shakeable",
+	"type": "module",
+	"main": "index.js",
+	"scripts": {
+		"test": "node test"
+	},
+	"bin": {
+		"agadoo": "cli.js"
+	},
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/Rich-Harris/agadoo.git"
+	},
+	"keywords": [
+		"modules",
+		"bundlers",
+		"rollup",
+		"webpack",
+		"parcel",
+		"tree-shaking"
+	],
+	"author": "Rich Harris",
+	"license": "MIT",
+	"bugs": {
+		"url": "https://github.com/Rich-Harris/agadoo/issues"
+	},
+	"homepage": "https://github.com/Rich-Harris/agadoo#readme",
+	"dependencies": {
+		"@rollup/plugin-virtual": "^3.0.1",
+		"acorn": "^8.8.1",
+		"rollup": "^3.5.0"
+	},
+	"devDependencies": {
+		"kleur": "^3.0.3"
+	}
 }

@@ -1,12 +1,12 @@
-const path = require('path');
-const { rollup } = require('rollup');
-const acorn = require('acorn');
-const virtual = require('rollup-plugin-virtual');
+import path from 'path';
+import { rollup } from 'rollup';
+import * as acorn from 'acorn';
+import virtual from '@rollup/plugin-virtual';
 
-exports.check = input => {
+export async function check(input) {
 	const resolved = path.resolve(input);
 
-	return rollup({
+	const bundle = await rollup({
 		input: '__agadoo__',
 		plugins: [
 			virtual({
@@ -16,24 +16,26 @@ exports.check = input => {
 		onwarn: (warning, handle) => {
 			if (warning.code !== 'EMPTY_BUNDLE') handle(warning);
 		}
-	}).then(bundle => bundle.generate({
-		format: 'esm'
-	})).then(result => {
-		const { code } = result.output[0];
-
-		const ast = acorn.parse(code, {
-			ecmaVersion: 11,
-			sourceType: 'module'
-		});
-
-		const nodes = ast.body.filter(node => {
-			return node.type !== 'ImportDeclaration';
-		});
-
-		console.log(code);
-
-		return {
-			shaken: nodes.length === 0
-		};
 	});
-};
+
+	const result = await bundle.generate({
+		format: 'esm'
+	});
+
+	const { code } = result.output[0];
+
+	const ast = acorn.parse(code, {
+		ecmaVersion: 11,
+		sourceType: 'module'
+	});
+
+	const nodes = ast.body.filter((node) => {
+		return node.type !== 'ImportDeclaration';
+	});
+
+	console.log(code);
+
+	return {
+		shaken: nodes.length === 0
+	};
+}

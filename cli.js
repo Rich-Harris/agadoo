@@ -1,18 +1,18 @@
 #!/usr/bin/env node
-const path = require('path');
-const fs = require('fs');
+import path from 'path';
+import fs from 'fs';
+import { check } from './index.js';
 
 const input = process.argv[2] || get_input();
+const relative = path.relative(process.cwd(), input);
 
-require('./index.js').check(input).then(result => {
-	const relative = path.relative(process.cwd(), input);
+const result = await check(input);
 
-	if (result.shaken) {
-		console.error(`Success! ${relative} is fully tree-shakeable`);
-	} else {
-		error(`Failed to tree-shake ${relative}`);
-	}
-});
+if (result.shaken) {
+	console.error(`Success! ${relative} is fully tree-shakeable`);
+} else {
+	error(`Failed to tree-shake ${relative}`);
+}
 
 function error(msg) {
 	console.error(msg);

@@ -1,67 +1,68 @@
-const fs = require('fs');
-const path = require('path');
-const c = require('kleur');
-const child_process = require('child_process');
+import fs from 'fs';
+import path from 'path';
+import c from 'kleur';
+import child_process from 'child_process';
+import { fileURLToPath } from 'url';
 
-const exec = cmd => new Promise((fulfil, reject) => {
-	child_process.exec(cmd, (err, stdout, stderr) => {
-		if (err) {
-			reject(err);
-		} else {
-			fulfil();
-		}
+const agadoo = fileURLToPath(new URL('../cli.js', import.meta.url));
+
+const exec = (cmd) =>
+	new Promise((fulfil, reject) => {
+		child_process.exec(cmd, (err, stdout, stderr) => {
+			if (err) {
+				reject(err);
+			} else {
+				fulfil();
+			}
+		});
 	});
-});
 
-async function main() {
-	const pass = path.resolve('test/pass');
-	const fail = path.resolve('test/fail');
+const pass = path.resolve('test/pass');
+const fail = path.resolve('test/fail');
 
-	let failed = false;
+let failed = false;
 
-	{
-		const dirs = fs.readdirSync(pass);
+{
+	const dirs = fs.readdirSync(pass);
 
-		console.log(c.bold().cyan('should pass'));
+	console.log(c.bold().cyan('should pass'));
 
-		for (const dir of dirs) {
-			process.chdir(`${pass}/${dir}`);
+	for (const dir of dirs) {
+		process.chdir(`${pass}/${dir}`);
 
-			try {
-				await exec(`agadoo`);
-				console.log(`${c.bold().green('✓')} ${dir}`);
-			} catch (err) {
-				failed = true;
-				console.log(`${c.bold().red('✗')} ${dir}`);
-			}
+		try {
+			await exec(agadoo);
+			console.log(`${c.bold().green('✓')} ${dir}`);
+		} catch (err) {
+			failed = true;
+			console.log(`${c.bold().red('✗')} ${dir}`);
 		}
-	}
-
-	console.log();
-
-	{
-		const dirs = fs.readdirSync(fail);
-
-		console.log(c.bold().cyan('should fail'));
-
-		for (const dir of dirs) {
-			process.chdir(`${fail}/${dir}`);
-
-			try {
-				await exec(`agadoo`);
-				failed = true;
-				console.log(`${c.bold().red('✗')} ${dir}`);
-			} catch (err) {
-				console.log(`${c.bold().green('✓')} ${dir}`);
-			}
-		}
-	}
-
-	console.log();
-
-	if (failed) {
-		process.exit(1);
 	}
 }
 
-main();
+console.log();
+
+{
+	const dirs = fs.readdirSync(fail);
+
+	console.log(c.bold().cyan('should fail'));
+
+	for (const dir of dirs) {
+		process.chdir(`${fail}/${dir}`);
+
+		try {
+			await exec(agadoo);
+			failed = true;
+			console.log(`${c.bold().red('✗')} ${dir}`);
+		} catch (err) {
+			console.log(`${c.bold().green('✓')} ${dir}`);
+		}
+	}
+}
+
+console.log();
+
+if (failed) {
+	console.log('FAILED\n');
+	process.exit(1);
+}

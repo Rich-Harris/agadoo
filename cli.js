@@ -24,7 +24,7 @@ function get_input() {
 		error(`Could not find package.json`);
 	}
 
-	const pkg = JSON.parse(fs.readFileSync('package.json'), 'utf-8');
+	const pkg = JSON.parse(fs.readFileSync('package.json', 'utf-8'));
 
 	const unresolved = pkg.module || pkg.main || 'index';
 	const resolved = resolve(unresolved);

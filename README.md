@@ -127,4 +127,4 @@ If tree-shaking still fails, it's because Rollup thinks that there are side-effe
 
 ## License
 
-[LIL](LICENSE).
+[MIT](LICENSE).

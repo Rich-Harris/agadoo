@@ -25,7 +25,7 @@ export async function check(input) {
 	const { code } = result.output[0];
 
 	const ast = acorn.parse(code, {
-		ecmaVersion: 11,
+		ecmaVersion: 'latest',
 		sourceType: 'module'
 	});
 
